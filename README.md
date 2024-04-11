@@ -212,7 +212,7 @@ This will return\
 [2,4]
 
 ### Row-Echelon Form
-`A.ref()` will return a copy of matrix A in row-echelon form. It is useful to keep this separate from reduced row-echelon form for computing the determinant.
+`A.ref()` will return a copy of matrix A in row-echelon form.
 
 Example
 ```
@@ -221,7 +221,7 @@ print(A.ref())
 ```
 This will return\
 [1,2]\
-[0,-2]
+[0,1]
 
 ### Reduced Row-Echelon Form
 `A.rref()` will return a copy of matrix A in reduced row-echelon form.
@@ -268,3 +268,13 @@ print(A.column_space())
 This will return\
 {(1,2), (3,4)}
 
+### Null Space
+`A.null_space()` will return a set of the basis vectors for the null space of matrix A.
+
+Example
+```
+A = Matrix(content=[[1,1,2],[-3,4,0]])
+print(A.null_space())
+```
+This will return\
+{(1,0.75,-0.875)}
