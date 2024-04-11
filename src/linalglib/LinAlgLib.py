@@ -1,7 +1,13 @@
+def _clean_number(n, precision=1e-6):
+    if abs(n - round(n)) < precision:
+        return int(round(n))
+    else:
+        return n
+
 class rowVector():
     #Row vectors for matrix initialization or other uncommon applications.
     def __init__(self, contents=[], size=0):
-        #Takes as argument a list of the vectors contents, or a desired size of which to initialize a zero vector.
+        """Takes as argument a list of the vectors contents, or a desired size of which to initialize a zero vector."""
         if contents != []:
             self.contents = []
             for i in range(0, len(contents)):
@@ -68,7 +74,7 @@ class rowVector():
 class columnVector():
     #Column vectors for applications involving n*1 matricies.
     def __init__(self, contents=[], size=0):
-        #Takes as argument a list of the vectors contents, or a desired size of which to initialize a zero vector.
+        """Takes as argument a list of the vectors contents, or a desired size of which to initialize a zero vector."""
         if contents != []:
             self.contents = []
             for i in range(0, len(contents)):
@@ -142,7 +148,7 @@ class columnVector():
 
 class Matrix():
     def __init__(self, content=[], size=(0,0)):
-        #Create a matrix from a list of lists or row/column vectors, or initialize a zero matrix of a specified size.
+        """Create a matrix from a list of lists or row/column vectors, or initialize a zero matrix of a specified size passed as a tuple size=(m,n)."""
         if content != []:
             self.contents = []
             if type(content[0]) == rowVector:
@@ -277,7 +283,7 @@ class Matrix():
                 raise ValueError("To multiply matrix A by matrix B, number of columns of A must equal number of rows of B.")
 
     def row_swap(self,r1,r2):
-        #Swap two rows of a matrix
+        """Swap two rows of a matrix. If A is a matrix, A.row_swap(i,j) will swap rows i and j."""
         tmp = []
         if r1 == r2:
             raise Exception("Can't swap a row with itself.")
@@ -288,7 +294,7 @@ class Matrix():
         self.contents[r2] = tmp
 
     def row_scale(self, r, c):
-        #Scales row r by a constant c
+        """Scales row r by a constant c. If A is a matrix A.row_scale(i,c) will scale the ith row of A by c."""
         if (type(c) != int) and (type(c) != float):
             raise TypeError("Row must be scaled by a scalar quantity.")
         elif (type(r) != int):
@@ -300,7 +306,7 @@ class Matrix():
             self.contents[r] = tmp.contents
             
     def row_addition(self, r, rc, c=1):
-        #Adds rc, scaled by a constant c (default 1), to r.
+        """Method for adding a scaled copy of one row of a matrix to another. If A is a matrix, A.row_addition(i,j,c) will add a copy of j scaled by constant c to row i. Default c is 1."""
         if r == rc:
             raise Exception("Adding a row to itself is just scaling. Use .row_scale() method instead.")
         elif (r > self.rows) or (rc > self.rows) or (r < 0) or (rc < 0) or (type(r) != int) or (type(rc) != int):
@@ -312,9 +318,20 @@ class Matrix():
             tmp = rowVector(contents=self.contents[r])
             tmp = tmp + v_to_add
             self.contents[r] = tmp.contents
+    
+    def _clean_matrix(self):
+        """Method meant to be used internally to clean up results of matrix algebra, returning a neater copy of the matrix object its called on."""
+        copy = Matrix(content=self.contents)
+        tmp = []
+        for i in range(copy.rows):
+            tmp1 = []
+            for j in range(self.columns):
+                tmp1.append(_clean_number(self.contents[i][j]))
+            tmp.append(tmp1)
+        return Matrix(content=tmp)
 
     def transpose(self):
-        #Returns a copy of the transpose of the matrix
+        """Returns a copy of the transpose of the matrix."""
         transpose = []
         for j in range(self.columns):
             trow = []
@@ -323,43 +340,76 @@ class Matrix():
             transpose.append(trow)
         return Matrix(content=transpose)
 
-    def ref(self):
-        #Returns a copy of the matrix, having used row operations to reduce it to row echelon form.
+    def diagnol(self):
+        """Returns a copy of the matrix, having used row operations to reduce it to diagnol form for the purposes of computing the determinant."""
         copy = Matrix(content=self.contents)
         for i in range(copy.columns):
             for j in range(i+1, copy.rows):
-                if (copy.contents[j][i] != 0):
+                if (copy.contents[j][i] != 0) and (copy.contents[i][i] != 0):
                     copy.row_addition(j, i, -(copy.contents[j][i])/(copy.contents[i][i]))
         return copy
+    
+    def ref(self):
+        """Returns a copy of the matrix, having used row operations to reduce it to row-echelon form."""
+        copy = Matrix(content=self.contents)
+        if copy.contents == [[0]] or copy.contents == [[1]]:
+            return copy
+        #1.Determine leftmost nonzero column.
+        column = None
+        for i in range(copy.columns):
+            if copy.transpose().contents[i] == [0 for l in range(copy.rows)]:
+                pass
+            else:
+                column = i
+                break
+        if column is None:
+            return copy
+        #2.Put a nonzero entry at the top of the column.
+        for i in range(copy.rows):
+            if copy.contents[i][column] != 0:
+                if i == 0:
+                    copy.row_scale(0, 1/copy.contents[0][column])
+                    break
+                else:
+                    copy.row_swap(i,0)
+                    copy.row_scale(0, 1/copy.contents[0][column])
+                    break
+        #3.Use row operations to eliminate any nonzero entries below pivot.
+        for i in range(1, copy.rows):
+            if copy.contents[i][column] != 0:
+                copy.row_addition(i,0,-copy.contents[i][column])
+        #4.Make a submatrix from the remainder of the matrix, and recursive call.
+        submatrix = Matrix(content=[copy.contents[i][1:] for i in range(1, copy.rows)])
+        return Matrix(content=[copy.contents[0]] + [[copy.contents[i+1][0]] + submatrix.ref().contents[i] for i in range(submatrix.rows)])._clean_matrix()
+        
             
     def rref(self):
-        #Returns a copy of the matrix in reduced row echelon form.
+        """Returns a copy of the matrix in reduced row-echelon form."""
         copy = self.ref()
-        for i in range(copy.rows):
+        for i in range(1, copy.rows):
             for j in range(copy.columns):
                 if (copy.contents[i][j] != 0):
-                    copy.row_scale(i, 1/(copy.contents[i][j]))
+                    for k in range(i):
+                        if copy.contents[k][j] != 0:
+                            copy.row_addition(k,i,-copy.contents[k][j])
                     break
-        for i in range(1, min(copy.rows, copy.columns)):
-            j = 1
-            while j <= i:
-                if copy.contents[i-j][i] != 0:
-                    copy.row_addition(i-j, i, -copy.contents[i-j][i])
-                j += 1
-        return copy
+        return copy._clean_matrix()
                     
     def det(self):
-        #Computes and returns the determinant of the matrix.
-        copy = self.ref()
+        """Computes and returns the determinant of the matrix."""
+        if self.rows == self.columns:
+            copy = self.diagnol()
+        else:
+            raise ValueError("Only square matrices have determinants.")
         det = 1
-        for i in range(min(self.rows,self.columns)):
+        for i in range(self.rows):
             det = det*copy.contents[i][i]
         if det == 0.0:
             return int(det)
         return round(det, 6)
     
     def row_space(self):
-        #Returns a basis for the row space of a matrix.
+        """Returns a basis for the row space of a matrix as a set of row vectors."""
         copy = self.rref()
         basis = set()
         for row in copy.contents:
@@ -370,7 +420,7 @@ class Matrix():
         return basis
     
     def column_space(self):
-        #Returns a basis for the column space of a matrix.
+        """Returns a basis for the column space of a matrix as a set of column vectors."""
         copy = self.transpose()
         copy_reduced = copy.rref()
         basis = set()
@@ -380,3 +430,58 @@ class Matrix():
             else:
                 basis.add(tuple(copy.contents[i]))
         return basis
+    
+    def null_space(self):
+        """Returns a basis for the null space of a matrix as a set of column vectors."""
+        copy = self.rref()
+        if copy.contents == id_matrix(copy.rows).contents:
+            return set()
+        else:
+            pivots = 0
+            for i in range(self.rows):
+                for j in range(self.columns):
+                    if copy.contents[i][j] == 1:
+                        pivots += 1
+                        break
+            basis_vector_count = copy.columns - pivots
+            tmp = augment(copy.transpose(),id_matrix(copy.columns)).ref()
+            basis = set()
+            for i in range(basis_vector_count):
+                tmp1 = []
+                for j in range(copy.columns):
+                    tmp1.append(tmp.contents[tmp.rows-i-1][copy.rows+j])
+                basis.add(tuple(tmp1))
+            return basis
+
+
+
+def id_matrix(n):
+    """Returns an identity matrix with dimension nxn. Usage: id_matrix(n)."""
+    tmp = []
+    for i in range(n):
+        tmp1 = []
+        for j in range(n):
+            if i == j:
+                tmp1.append(1)
+            else:
+                tmp1.append(0)
+        tmp.append(tmp1)
+    return Matrix(content=tmp)
+
+def augment(A,B):
+    """augment(A,B) will return the augmented matrix of A and B."""
+    if (type(A) != Matrix) or (type(B) != Matrix):
+        raise ValueError("Can only augment matrices.")
+    elif A.rows != B.rows:
+        raise ValueError("Matrices must have equal numbers of rows in order to augment.")
+    else:
+        tmp = []
+        for i in range(A.rows):
+            tmp1 = []
+            for j in range(A.columns):
+                tmp1.append(A.contents[i][j])
+            for k in range(B.columns):
+                tmp1.append(B.contents[i][k])
+            tmp.append(tmp1)
+        return Matrix(content=tmp)
+        
