@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "linalglib"
+name = "linalgebralib"
 version = "0.0.0"
 authors = [
   { name="Adam Authur", email="aauthur@tamu.edu" },
