@@ -18,7 +18,7 @@ This project was built for Python, with the ultimate aim of contributing to othe
 
 You can find linalgebralib on pypi here: https://pypi.org/project/linalgebralib/
 
-To install and utilize this library, simply run `pip install linalgebralib`.
+To install and utilize this library, simply run `pip install linalgebralib`, and import the library via `from linalgebralib import LinAlgebraLib as la`.
 
 # Documentation
 The following documents everything presently supported by linalgebralib.
