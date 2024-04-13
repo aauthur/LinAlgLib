@@ -74,6 +74,23 @@ print(a1*3)
 ```
 This will output [3,6,9]
 
+### Multiplication by Column Vectors and Matrices
+Row vectors of dimension (1 x n) can also be multiplied by column vectors and matrices of dimension (n x 1) following the rules of matrix multiplication.
+
+Example
+```
+r1 = rowVector([1,2,3])
+A = Matrix(content=[[1],[2],[3]])
+c1 = columnVector([1,2,3])
+print(r1*A)
+print(r1*c1)
+```
+
+This will output "14\n14\n".
+
+### Transpose
+`r1.transpose()` will return a column vector with the same contents as the row vector r1.
+
 # Column Vectors
 columnVector objects allow users to create column vectors. Column vectors can be used on their own for applications involving them, or a list of column vectors can be used in order to instantiate a matrix.
 
@@ -131,6 +148,23 @@ print(v*3)
 ```
 This will output [3,6,9]**T
 
+### Multiplication by Row Vectors and Matrices
+Column vectors of dimension (n x 1) can also be multiplied by row vectors and matrices of dimension (1 x n) following the rules of matrix multiplication.
+
+Example
+```
+r1 = rowVector([1,2,3])
+A = Matrix(content=[[1,2,3]])
+c1 = columnVector([1,2,3])
+print(c1*r1)
+print(c1*A)
+```
+
+This will output "14\n14\n".
+
+### Transpose
+`c1.transpose()` will return a row vector with the same contents as the column vector c1.
+
 # Matrices
 Matrix objects allow users to create matrices. Matrices are associated with several methods listed below.
 
@@ -177,7 +211,7 @@ new_matrix = 3x3matrix_a - 3x3matrix_b
 ```
 
 ### Matrix Multiplication
-As in matrix algebra, (m x n) matrices can multiply on the left with (n x l) matrices, where l is any positive integer. They can also be scaled by integers or floating point numbers.
+As in matrix algebra, (m x n) matrices can multiply on the left with (n x l) matrices, where l is any positive integer. Matrices can also multiply with row and column vectors provided they fit this criteria. Additionally, matrices can be scaled by integers or floating point numbers.
 
 Example
 ```
@@ -235,6 +269,9 @@ This will return\
 [1,0]\
 [0,1]
 
+### Diagonal
+This method is meant to be used internally in order to compute the determinant of a square matrix. `A.diagonal()` will return a tuple. The first value in the tuple will be matrix A transformed into upper diagonal form via row operations. The second value in the tuple will either be 1 or -1 based on how many row swaps were necessary in computing the diagonal form of A. This value multiplied by the diagonal entries in A will give the determinant, described in further detail in the next portion of the documentation. 
+
 ### Determinant
 `A.det()` will return the value of the determinant of matrix A.
 
@@ -278,3 +315,75 @@ print(A.null_space())
 ```
 This will return\
 {(1,0.75,-0.875)}
+
+### Inverse
+`A.inverse()` will return a copy of the inverse of A, provided that A is an invertible matrix.
+
+Example
+```
+A = Matrix(content=[[1,2],[1,0]])
+print(A.inverse())
+```
+This will output\
+[0,1]\
+[0.5,-0.5]
+
+# Functions
+
+### Identity Matrix
+`id_matrix(n)` will return an identity matrix with (n x n) dimensions.
+
+Example
+```
+A = id_matrix(3)
+print(A)
+```
+This will output\
+[1,0,0]\
+[0,1,0]\
+[0,0,1]
+
+### Augment
+`augment(A,B)` is a function that will return the augmented matrix of A and B.
+
+Example
+```
+A = Matrix(content=[[1,0],[2,1]])
+B = Matrix(content=[[7,4],[3,1]])
+print(augment(A,B))
+```
+This will output\
+[1,0,7,4]\
+[2,1,3,1]
+
+### Dot Product
+`dot(A,B)` will compute the dot product of two like vectors A and B.
+
+Example
+```
+A = columnVector([1,2,3])
+B = columnVector([2,1,1])
+print(dot(A,B))
+```
+This will output 7.
+
+### Magnitude
+`magnitude(A)` will return the magnitude, or Euclidean distance from the zero vector, of a vector.
+
+Example
+```
+A = columnVector([3,4])
+print(magnitude(A))
+```
+This will output 5.
+
+### Angle
+The angle function is used to compute the angle between two vectors. The usage is `angle(A,B, degrees=False)`, where A and B are two like vectors. The angle function will output radians by default, but can be changed to degrees by setting the degrees parameter to True.
+
+Example
+```
+A = columnVector([1,2])
+B = columnVector([-2,1])
+print(angle(A,B,True))
+```
+This will output 90.

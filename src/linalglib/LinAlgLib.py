@@ -1,3 +1,5 @@
+import math
+
 def _clean_number(n, precision=1e-6):
     if abs(n - round(n)) < precision:
         return int(round(n))
@@ -62,14 +64,35 @@ class rowVector():
             raise TypeError("Cannot subtract non-vectors from vectors!")
         
     def __mul__(self, u):
-        #Method for scalar multiplication of vectors.
+        #Method for scalar multiplication of row vectors, or multiplication of row vectors by column vectors or matrices of appropriate size.
         if (type(u) == int) or (type(u) == float):
             tmp = []
             for i in range(len(self.contents)):
                 tmp.append(self.contents[i]*u)
             return rowVector(contents=tmp)
+        elif (type(u) == Matrix) or (type(u) == columnVector):
+            if type(u) == Matrix:
+                if len(u.contents) == self.size:
+                    result = 0
+                    for i in range(len(u.contents)):
+                        if len(u.contents[i]) != 1:
+                            raise TypeError("Invalid dimensions for multiplication of row vector by matrix!")
+                        result += self.contents[i]*u.contents[i][0]
+                    return result
+                else:
+                    raise TypeError("Invalid dimensions for multiplication of row vector by matrix!")
+            else:
+                if u.size != self.size:
+                    raise TypeError("Invalid dimensions for multiplication of row vector by column vector.")
+                else:
+                    result = 0
+                    for i in range(self.size):
+                        result += self.contents[i]*u.contents[i][0]
+                    return result
         else:
-            raise TypeError("Vectors can only be multiplied by scalars.")
+            raise TypeError("Row vectors can only be multiplied by scalars, or column vectors of appropriate size.")
+    def transpose(self):
+        return columnVector(contents=self.contents)
 
 class columnVector():
     #Column vectors for applications involving n*1 matricies.
@@ -137,14 +160,33 @@ class columnVector():
             raise TypeError("Cannot subtract column vectors with non-vectors or row vectors (Aside from n*1 matricies of the same dimension).")
         
     def __mul__(self, u):
-        #Method for scalar multiplication of vectors.
+        #Method for scalar multiplication of column vectors, and multiplication by row vectors or matrices of appropriate sizes.
         if (type(u) == int) or (type(u) == float):
             tmp = []
             for i in range(len(self.contents)):
                 tmp.append(self.contents[i][0]*u)
             return columnVector(contents=tmp)
+        elif (type(u) == Matrix) or (type(u) == rowVector):
+            if type(u) == Matrix:
+                if (len(u.contents) == 1) and (len(u.contents[0]) == self.size):
+                    result = 0
+                    for i in range(len(u.contents[0])):
+                        result += self.contents[i][0]*u.contents[0][i]
+                    return result
+                else:
+                    raise TypeError("Invalid dimensions for multiplication of row vector by matrix.")
+            else:
+                if u.size != self.size:
+                    raise TypeError("Invalid dimensions for multiplication of row vector by column vector.")
+                else:
+                    result = 0
+                    for i in range(self.size):
+                        result += self.contents[i][0]*u.contents[i]
+                    return result
         else:
             raise TypeError("Vectors can only be multiplied by scalars.")
+    def transpose(self):
+        return rowVector(contents=[self.contents[i][0] for i in range(self.size)])
 
 class Matrix():
     def __init__(self, content=[], size=(0,0)):
@@ -272,15 +314,20 @@ class Matrix():
                 tmp = []
                 for i in range(self.rows):
                     tmp1 = []
-                    for k in range(self.columns):
-                        tmp2 = 0
-                        for j in range(self.columns):
-                            tmp2 += (self.contents[i][j]*B.contents[j][k])
-                        tmp1.append(tmp2)
+                    for j in range(B.columns):
+                        value = 0
+                        for k in range(B.rows):
+                            value += self.contents[i][k]*B.contents[k][j]
+                        tmp1.append(value)
                     tmp.append(tmp1)
                 return Matrix(content=tmp)
             else:
                 raise ValueError("To multiply matrix A by matrix B, number of columns of A must equal number of rows of B.")
+        elif isinstance(B, rowVector) or isinstance(B,columnVector):
+            return B*self
+        else:
+            raise TypeError("Can only multiply matrices by scalars and vectors of appropriate dimensions.")
+        
 
     def row_swap(self,r1,r2):
         """Swap two rows of a matrix. If A is a matrix, A.row_swap(i,j) will swap rows i and j."""
@@ -340,14 +387,39 @@ class Matrix():
             transpose.append(trow)
         return Matrix(content=transpose)
 
-    def diagnol(self):
-        """Returns a copy of the matrix, having used row operations to reduce it to diagnol form for the purposes of computing the determinant."""
+    def diagnol(self, det_value=1):
+        """Returns a copy of the matrix, having used row operations to reduce it to a diagnol form without scaling for the purposes of computing the determinant."""
         copy = Matrix(content=self.contents)
+        if copy.contents == [[0]] or copy.contents == [[1]]:
+            return (copy, det_value)
+        #1.Determine leftmost nonzero column.
+        column = None
         for i in range(copy.columns):
-            for j in range(i+1, copy.rows):
-                if (copy.contents[j][i] != 0) and (copy.contents[i][i] != 0):
-                    copy.row_addition(j, i, -(copy.contents[j][i])/(copy.contents[i][i]))
-        return copy
+            if copy.transpose().contents[i] == [0 for l in range(copy.rows)]:
+                pass
+            else:
+                column = i
+                break
+        if column is None:
+            return (copy, det_value)
+        #2.Put a nonzero entry at the top of the column.
+        for i in range(copy.rows):
+            if copy.contents[i][column] != 0:
+                if i == 0:
+                    break
+                else:
+                    copy.row_swap(i,0)
+                    det_value = det_value*-1
+                    break
+        #3.Use row operations to eliminate any nonzero entries below pivot.
+        for i in range(1, copy.rows):
+            if copy.contents[i][column] != 0:
+                copy.row_addition(i,0,-copy.contents[i][column]/copy.contents[0][column])
+        #4.Make a submatrix from the remainder of the matrix, and recursive call.
+        submatrix = Matrix(content=[copy.contents[i][1:] for i in range(1, copy.rows)])
+        submatrix_result = submatrix.diagnol()
+        det_value *= submatrix_result[1]
+        return (Matrix(content=[copy.contents[0]] + [[copy.contents[i+1][0]] + submatrix_result[0].contents[i] for i in range(submatrix.rows)])._clean_matrix(), det_value)
     
     def ref(self):
         """Returns a copy of the matrix, having used row operations to reduce it to row-echelon form."""
@@ -401,9 +473,9 @@ class Matrix():
             copy = self.diagnol()
         else:
             raise ValueError("Only square matrices have determinants.")
-        det = 1
+        det = copy[1]
         for i in range(self.rows):
-            det = det*copy.contents[i][i]
+            det = det*copy[0].contents[i][i]
         if det == 0.0:
             return int(det)
         return round(det, 6)
@@ -452,6 +524,23 @@ class Matrix():
                     tmp1.append(tmp.contents[tmp.rows-i-1][copy.rows+j])
                 basis.add(tuple(tmp1))
             return basis
+    def inverse(self):
+        """Returns a copy of the inverse of a matrix, provided that it is invertible."""
+        copy = Matrix(content=self.contents)
+        try:
+            if copy.det() == 0:
+                raise TypeError("Matrix is not invertible. Columns or rows must not be linearly independent.")
+            else:
+                equality = augment(copy,id_matrix(copy.rows)).rref()
+                tmp = []
+                for i in range(copy.rows):
+                    tmp1 = []
+                    for j in range(copy.columns):
+                        tmp1.append(equality.contents[i][j+copy.columns])
+                    tmp.append(tmp1)
+                return Matrix(content=tmp)._clean_matrix()
+        except ValueError:
+            raise TypeError("Only square matrices can be invertible.")
 
 
 
@@ -485,3 +574,31 @@ def augment(A,B):
             tmp.append(tmp1)
         return Matrix(content=tmp)
         
+def dot(A,B):
+    """Takes two vectors (both row vectors or both column vectors) and outputs their dot product."""
+    if (isinstance(A,rowVector) and isinstance(B,rowVector)) or (isinstance(A,columnVector) and isinstance(B,columnVector)):
+        return A*B.transpose()
+    else:
+        raise TypeError("Invalid input: Must be two vectors of the same type.")
+    
+def magnitude(A):
+    """Returns the magnitude of a vector."""
+    if type(A) == rowVector or type(A) == columnVector:
+        return (dot(A,A))**(0.5)
+    else:
+        raise TypeError("Invalid input: Can only compute the magnitude of vectors.")
+    
+def angle(A,B, degrees=False):
+    """Returns the angle between two vectors in the same vector space. Default output is in radians."""
+    if (isinstance(A,rowVector) and isinstance(B,rowVector)) or (isinstance(A,columnVector) and isinstance(B,columnVector)):
+        if A.size == B.size:
+            result = math.acos(dot(A,B)/(magnitude(A)*magnitude(B)))
+            if degrees:
+                return result * (180/math.pi)
+            else:
+                return result
+        else:
+            raise TypeError("Vectors must be of the same dimension.")
+    else:
+        raise TypeError("Invalid input: Must be two vectors of the same type in the same vector space.")
+    
