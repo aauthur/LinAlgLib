@@ -1,8 +1,8 @@
-# LinAlgLib
+# LinAlgebraLib
 
 ### About the Project
 
-This library aims to offer user-friendly functionality for several important concepts from linear algebra, from basic matrix algebra to more complex operations like computing the null space of a matrix. LinAlgLib will be uploaded to PyPi as soon as I finish implementing the operations it should be able to handle. Until then the code will be available from this repository, and the documentation will be updated with each push to reflect what has currently been implemented. 
+This library aims to offer user-friendly functionality for several important concepts from linear algebra, from basic matrix algebra to more complex operations like computing the null space of a matrix. LinAlgebraLib will be uploaded to PyPi as soon as I finish implementing the operations it should be able to handle. Until then the code will be available from this repository, and the documentation will be updated with each push to reflect what has currently been implemented. 
 
 ### Purpose
 
@@ -15,7 +15,7 @@ Although numpy and scipy already support most if not all of the computations tha
 This project was built for Python, with the ultimate aim of contributing to other machine learning libraries.
 
 # Documentation
-The following documents everything presently supported by linalglib.
+The following documents everything presently supported by linalgebralib.
 
 # Row Vectors
 rowVector objects allow users to create Row Vectors for the purposes of matrix initialization, or for uncommon applications requiring row vectors.
