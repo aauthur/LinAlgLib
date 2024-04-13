@@ -14,6 +14,12 @@ Although numpy and scipy already support most if not all of the computations tha
 
 This project was built for Python, with the ultimate aim of contributing to other machine learning libraries.
 
+### PyPi and Installation
+
+You can find linalgebralib on pypi here: https://pypi.org/project/linalgebralib/
+
+To install and utilize this library, simply run `pip install linalgebralib`.
+
 # Documentation
 The following documents everything presently supported by linalgebralib.
 
