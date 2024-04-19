@@ -153,7 +153,7 @@ class columnVector():
                 raise TypeError("Vector subtraction must use vectors of the same dimension!")
             else:
                 tmp = []
-                for i in range(self.contents):
+                for i in range(len(self.contents)):
                     tmp.append(self.contents[i][0]-u.contents[i][0])
                 return columnVector(contents=tmp)
         else:
@@ -174,7 +174,7 @@ class columnVector():
                         result += self.contents[i][0]*u.contents[0][i]
                     return result
                 else:
-                    raise TypeError("Invalid dimensions for multiplication of row vector by matrix.")
+                    raise TypeError("Invalid dimensions for multiplication of column vector by matrix.")
             else:
                 if u.size != self.size:
                     raise TypeError("Invalid dimensions for multiplication of row vector by column vector.")
@@ -323,8 +323,28 @@ class Matrix():
                 return Matrix(content=tmp)
             else:
                 raise ValueError("To multiply matrix A by matrix B, number of columns of A must equal number of rows of B.")
-        elif isinstance(B, rowVector) or isinstance(B,columnVector):
-            return B*self
+        elif isinstance(B,columnVector):
+            if B.size != self.columns:
+                raise ValueError("Invalid dimensions for matrix multiplication with a column vector.")
+            else:
+                tmp = []
+                for i in range(self.rows):
+                    tmp1 = 0
+                    for j in range(self.columns):
+                        tmp1 += self.contents[i][j]*B.contents[j][0]
+                    tmp.append([tmp1])
+                return Matrix(content=tmp)._clean_matrix()
+        elif isinstance(B, rowVector):
+            if self.columns != 1:
+                raise ValueError("Invalid dimensions for multiplication of a Matrix and a row vector.")
+            else:
+                tmp = []
+                for i in range(self.rows):
+                    tmp1 = []
+                    for j in range(B.size):
+                        tmp1.append(self.contents[i][0]*B.contents[j])
+                    tmp.append(tmp1)
+                return Matrix(content=tmp)._clean_matrix()
         else:
             raise TypeError("Can only multiply matrices by scalars and vectors of appropriate dimensions.")
         
