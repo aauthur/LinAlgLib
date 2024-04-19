@@ -2,13 +2,11 @@
 
 from linalgebralib import LinAlgebraLib as la
 
-A = la.Matrix(content=[[1,1,3],[-1,3,1],[1,2,4]])
-b = la.columnVector(contents=[3,2,1])
-x_bar = (la.columnVector(contents=[7/3,14/3,-7/3]))
-y_bar = (la.columnVector(contents=[1,2,-1]))
+A = la.Matrix(content=[[1,0,0],[0,1,0],[0,0,1]])
+b = la.Matrix(content=[[1],[2],[3]])
+l = la.columnVector(contents=[1,2,3])
+print((A*b+l).contents)
 
-print(la.magnitude(b-x_bar))
-print(la.magnitude(b-y_bar))
 
 #TODO: Implement vector projections, unit vectors, cross product.
 

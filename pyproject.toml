@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "linalgebralib"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
   { name="Adam Authur", email="aauthur@tamu.edu" },
 ]
@@ -18,4 +18,4 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/aauthur/LinAlgLib"
+Homepage = "https://github.com/aauthur/LinAlgebraLib"

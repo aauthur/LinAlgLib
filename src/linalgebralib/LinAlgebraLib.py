@@ -277,7 +277,7 @@ class Matrix():
         except AttributeError:
             if isinstance(B, columnVector) or isinstance(B, rowVector):
                 tmp = B + self
-                return Matrix(content=[tmp.contents])
+                return Matrix(content=tmp.contents)
             else:
                 raise TypeError("Cannot add matricies with non matricies.")
         
