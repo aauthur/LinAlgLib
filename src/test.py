@@ -5,9 +5,9 @@ from linalgebralib import LinAlgebraLib as la
 A = la.Matrix(content=[[1,0,0],[0,1,0],[0,0,1]])
 b = la.Matrix(content=[[1],[2],[3]])
 l = la.columnVector(contents=[1,2,3])
-print((A*b+l).contents)
+print((l+b).contents)
 
 
-#TODO: Implement vector projections, unit vectors, cross product.
+#TODO: Implement vector projections, unit vectors, cross product. FIX MATRIX - COLUMN VECTOR OPERATION
 
 #Changlog: Fixed matrix multiplication with column vectors and row vectors where matrix is multiplied on the left.
