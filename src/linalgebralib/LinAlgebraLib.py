@@ -53,7 +53,7 @@ class Matrix():
             self.rows = size[0]
             self.columns = size[1]
             for i in range(self.rows):
-                self.contents.append(rowVector(size=self.columns).contents)
+                self.contents.append([0 for i in range(self.columns)])
 
     def __repr__(self):
         #Respresents the matrix as rows on new lines.
