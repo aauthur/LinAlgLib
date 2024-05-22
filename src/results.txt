@@ -1,0 +1,300 @@
+For 5x5 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0 C 0.0
+ Matrix Multiplication: Python 0.0 C 0.0
+Setup Time: Python 0.0 C 0.0
+
+
+For 15x15 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0 C 0.0
+ Matrix Multiplication: Python 0.0 C 0.0
+Setup Time: Python 0.0 C 0.0
+
+
+For 25x25 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0 C 9.856224060058593e-05
+ Matrix Multiplication: Python 0.00396275520324707 C 3.118515014648438e-05
+Setup Time: Python 3.147125244140625e-05 C 0.00012335777282714843
+
+
+For 35x35 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0 C 0.00043544769287109377
+ Matrix Multiplication: Python 0.004767656326293945 C 0.0
+Setup Time: Python 0.001093578338623047 C 0.00226287841796875
+
+
+For 45x45 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.00019979476928710938 C 0.0012021064758300781
+ Matrix Multiplication: Python 0.013402509689331054 C 0.0013283252716064452
+Setup Time: Python 0.00022721290588378906 C 0.0010004520416259765
+
+
+For 55x55 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0006058216094970703 C 0.0009998798370361329
+ Matrix Multiplication: Python 0.020511293411254884 C 0.0013472557067871094
+Setup Time: Python 0.00020031929016113282 C 0.0010163307189941407
+
+
+For 65x65 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0 C 0.00014801025390625
+ Matrix Multiplication: Python 0.03230991363525391 C 0.0031535148620605467
+Setup Time: Python 0.00020031929016113282 C 0.0031581401824951174
+
+
+For 75x75 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0 C 0.003122234344482422
+ Matrix Multiplication: Python 0.056286191940307616 C 0.005476713180541992
+Setup Time: Python 0.0 C 0.003130006790161133
+
+
+For 85x85 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.00020022392272949218 C 0.0031243324279785155
+ Matrix Multiplication: Python 0.06955575942993164 C 0.006247615814208985
+Setup Time: Python 0.00021543502807617188 C 0.003125762939453125
+
+
+For 95x95 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.003524637222290039 C 0.0
+ Matrix Multiplication: Python 0.10104146003723144 C 0.012498617172241211
+Setup Time: Python 0.00020003318786621094 C 0.0
+
+
+For 105x105 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0033059120178222656 C 0.009377717971801758
+ Matrix Multiplication: Python 0.12861533164978028 C 0.006245946884155274
+Setup Time: Python 0.003146076202392578 C 0.0
+
+
+For 115x115 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.003121185302734375 C 0.006247329711914063
+ Matrix Multiplication: Python 0.17227716445922853 C 0.009392309188842773
+Setup Time: Python 0.0 C 0.0031244754791259766
+
+
+For 125x125 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.006251239776611328 C 0.008559226989746094
+ Matrix Multiplication: Python 0.22028379440307616 C 0.015743303298950195
+Setup Time: Python 0.0031096935272216797 C 0.003125
+
+
+For 135x135 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0005183219909667969 C 0.003105020523071289
+ Matrix Multiplication: Python 0.27774500846862793 C 0.025582361221313476
+Setup Time: Python 0.003841209411621094 C 0.006249713897705078
+
+
+For 145x145 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.003739595413208008 C 0.006303596496582031
+ Matrix Multiplication: Python 0.3594367504119873 C 0.023486948013305663
+Setup Time: Python 0.001009225845336914 C 0.008169174194335938
+
+
+For 155x155 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0031232357025146483 C 0.00018701553344726562
+ Matrix Multiplication: Python 0.46059117317199705 C 0.03358259201049805
+Setup Time: Python 0.0031642913818359375 C 0.01633172035217285
+
+
+For 165x165 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.004504013061523438 C 0.011363983154296875
+ Matrix Multiplication: Python 0.6035293102264404 C 0.04763979911804199
+Setup Time: Python 0.005014562606811523 C 0.018991565704345702
+
+
+For 175x175 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0062519550323486325 C 0.015630197525024415
+ Matrix Multiplication: Python 0.6452378749847412 C 0.03762693405151367
+Setup Time: Python 0.006250762939453125 C 0.015618515014648438
+
+
+For 185x185 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.006990671157836914 C 0.014760732650756836
+ Matrix Multiplication: Python 0.7707752227783203 C 0.05737462043762207
+Setup Time: Python 0.019417667388916017 C 0.023832321166992188
+
+
+For 195x195 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.0037145614624023438 C 0.018783187866210936
+ Matrix Multiplication: Python 1.0568754196166992 C 0.049176931381225586
+Setup Time: Python 0.0 C 0.01882634162902832
+
+
+For 205x205 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.006252765655517578 C 0.019117116928100586
+ Matrix Multiplication: Python 1.1190312862396241 C 0.05691075325012207
+Setup Time: Python 0.013151931762695312 C 0.02227892875671387
+
+
+For 215x215 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.005702781677246094 C 0.015626239776611327
+ Matrix Multiplication: Python 1.110839033126831 C 0.05964198112487793
+Setup Time: Python 0.011303424835205078 C 0.02189292907714844
+
+
+For 225x225 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.006183338165283203 C 0.025061845779418945
+ Matrix Multiplication: Python 1.36545090675354 C 0.0660891056060791
+Setup Time: Python 0.007004070281982422 C 0.01874570846557617
+
+
+For 235x235 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.012061595916748047 C 0.022328615188598633
+ Matrix Multiplication: Python 1.557605266571045 C 0.08694939613342285
+Setup Time: Python 0.006440019607543946 C 0.03092160224914551
+
+
+For 245x245 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.013817548751831055 C 0.02499537467956543
+ Matrix Multiplication: Python 1.789522361755371 C 0.0841174602508545
+Setup Time: Python 0.005502176284790039 C 0.02554945945739746
+
+
+For 255x255 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.00716710090637207 C 0.025252628326416015
+ Matrix Multiplication: Python 1.9606051445007324 C 0.09117712974548339
+Setup Time: Python 0.009412240982055665 C 0.031261777877807616
+
+
+For 265x265 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.017902374267578125 C 0.02811455726623535
+ Matrix Multiplication: Python 2.1623959064483644 C 0.10065312385559082
+Setup Time: Python 0.009583091735839844 C 0.03438210487365723
+
+
+For 275x275 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.010638570785522461 C 0.03033757209777832
+ Matrix Multiplication: Python 2.5465158462524413 C 0.11628470420837403
+Setup Time: Python 0.009375238418579101 C 0.03685650825500488
+
+
+For 285x285 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.013743829727172852 C 0.03438239097595215
+ Matrix Multiplication: Python 2.7783205032348635 C 0.13459715843200684
+Setup Time: Python 0.006952524185180664 C 0.03782210350036621
+
+
+For 295x295 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.015429544448852538 C 0.034385299682617186
+ Matrix Multiplication: Python 3.0799057483673096 C 0.15318889617919923
+Setup Time: Python 0.00680851936340332 C 0.04430379867553711
+
+
+For 305x305 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.01842799186706543 C 0.040550947189331055
+ Matrix Multiplication: Python 3.3381778717041017 C 0.15642285346984863
+Setup Time: Python 0.0057887077331542965 C 0.04098496437072754
+
+
+For 315x315 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.018252038955688478 C 0.046862030029296876
+ Matrix Multiplication: Python 3.773471403121948 C 0.17203540802001954
+Setup Time: Python 0.015621042251586914 C 0.043844747543334964
+
+
+For 325x325 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.014288711547851562 C 0.05045394897460938
+ Matrix Multiplication: Python 4.007926511764526 C 0.21939435005187988
+Setup Time: Python 0.015631628036499024 C 0.06357007026672364
+
+
+For 335x335 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.014896917343139648 C 0.03436918258666992
+ Matrix Multiplication: Python 4.4302037239074705 C 0.21038365364074707
+Setup Time: Python 0.01683797836303711 C 0.046866989135742186
+
+
+For 345x345 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.019195556640625 C 0.050031614303588864
+ Matrix Multiplication: Python 4.960959434509277 C 0.22889671325683594
+Setup Time: Python 0.017824316024780275 C 0.05026230812072754
+
+
+For 355x355 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.01715507507324219 C 0.050310277938842775
+ Matrix Multiplication: Python 5.388613510131836 C 0.24939913749694825
+Setup Time: Python 0.020202064514160158 C 0.061585426330566406
+
+
+For 365x365 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.018598127365112304 C 0.06259222030639648
+ Matrix Multiplication: Python 5.940372133255005 C 0.2782013416290283
+Setup Time: Python 0.019903945922851562 C 0.06985812187194824
+
+
+For 375x375 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.02107272148132324 C 0.05654540061950684
+ Matrix Multiplication: Python 6.459395217895508 C 0.2805309772491455
+Setup Time: Python 0.020462226867675782 C 0.061948728561401364
+
+
+For 385x385 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.021608781814575196 C 0.06797099113464355
+ Matrix Multiplication: Python 6.905435276031494 C 0.3051173210144043
+Setup Time: Python 0.02623753547668457 C 0.06248950958251953
+
+
+For 395x395 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.031124401092529296 C 0.05966863632202148
+ Matrix Multiplication: Python 7.372757768630981 C 0.3314055919647217
+Setup Time: Python 0.025937938690185548 C 0.07549066543579101
+
+
+For 405x405 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.028760290145874022 C 0.06269636154174804
+ Matrix Multiplication: Python 8.090742588043213 C 0.3524588108062744
+Setup Time: Python 0.026877927780151366 C 0.08708090782165527
+
+
+For 415x415 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.02674999237060547 C 0.06817784309387206
+ Matrix Multiplication: Python 8.589092302322388 C 0.36807980537414553
+Setup Time: Python 0.029317712783813475 C 0.08705568313598633
+
+
+For 425x425 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.02971358299255371 C 0.08335328102111816
+ Matrix Multiplication: Python 9.315547657012939 C 0.40875887870788574
+Setup Time: Python 0.03683252334594726 C 0.09076290130615235
+
+
+For 435x435 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.03166232109069824 C 0.07583208084106445
+ Matrix Multiplication: Python 10.066707038879395 C 0.4569504737854004
+Setup Time: Python 0.02539234161376953 C 0.10253438949584961
+
+
+For 445x445 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.031182479858398438 C 0.09325404167175293
+ Matrix Multiplication: Python 10.51746907234192 C 0.46895804405212405
+Setup Time: Python 0.034606647491455075 C 0.09583230018615722
+
+
+For 455x455 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.03502116203308105 C 0.08821210861206055
+ Matrix Multiplication: Python 11.508721590042114 C 0.5079398155212402
+Setup Time: Python 0.031400537490844725 C 0.10592331886291503
+
+
+For 465x465 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.03157615661621094 C 0.09117813110351562
+ Matrix Multiplication: Python 12.222791767120361 C 0.5244136810302734
+Setup Time: Python 0.038205623626708984 C 0.1182220458984375
+
+
+For 475x475 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.03467483520507812 C 0.10703468322753906
+ Matrix Multiplication: Python 12.743672323226928 C 0.5896111488342285
+Setup Time: Python 0.038680505752563474 C 0.11614012718200684
+
+
+For 485x485 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.040482950210571286 C 0.09350361824035644
+ Matrix Multiplication: Python 14.04027967453003 C 0.6099683284759522
+Setup Time: Python 0.04192862510681152 C 0.11660676002502442
+
+
+For 495x495 matrices, the following are python-caugmented runtimes for different operations:
+Matrix Addition: Python 0.03937001228332519 C 0.11998333930969238
+ Matrix Multiplication: Python 14.42573857307434 C 0.7032692909240723
+Setup Time: Python 0.03764567375183105 C 0.1450733184814453
+
+
